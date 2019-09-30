@@ -44,15 +44,15 @@ Important note: input file must be previously annotated by https://github.com/Ia
 ---
 
 ### Installation
-Download nf-100GMX-variant-summarizer from Github repository:  
+Download nf-vcf-novel-dataset-builder from Github repository:  
 ```
-git clone https://github.com/Iaguilaror/nf-100GMX-variant-summarizer
+git clone https://github.com/Iaguilaror/nf-vcf-novel-dataset-builder
 ```
 
 ---
 
 #### Test
-To test nf-100GMX-variant-summarizer's execution using test data, run:
+To test nf-vcf-novel-dataset-builder's execution using test data, run:
 ```
 ./runtest.sh
 ```
@@ -60,26 +60,26 @@ To test nf-100GMX-variant-summarizer's execution using test data, run:
 Your console should print the Nextflow log for the run, once every process has been submitted, the following message will appear:
 ```
 ======
-VCF summarizer: Basic pipeline TEST SUCCESSFUL
+VCF novel finder: Basic pipeline TEST SUCCESSFUL
 ======
 ```
 
-nf-100GMX-variant-summarizer results for test data should be in the following file:
+nf-vcf-novel-dataset-builder results for test data should be in the following file:
 ```
-nf-100GMX-variant-summarizer/test/results/VCFsummarizer-results
+nf-vcf-novel-dataset-builder/test/results/VCFnovelbuilder-results
 ```
 
 ---
 
 ### Usage
-To run nf-100GMX-variant-summarizer go to the pipeline directory and execute:
+To run nf-vcf-novel-dataset-builder go to the pipeline directory and execute:
 ```
-nextflow run summarize-vcf.nf --vcffile <path to input 1> --metadata <path to input 2> --nsamples <integer> --group_minaf <numeric> --outgroup_maxaf <numeric> [--output_dir path to results ]
+nextflow run vcf-novel-finder.nf --vcffile <path to input 1> [--output_dir path to results ]
 ```
 
 For information about options and parameters, run:
 ```
-nextflow run summarize-vcf.nf --help
+nextflow run vcf-novel-finder.nf --help
 ```
 
 ---
@@ -95,51 +95,28 @@ chr21	5101724	.	G	A	.	PASS	AC=1;AF=0.00641;AN=152;DP=903;ANN=A|intron_variant|MO
 chr21	5102165	rs1373489291	G	T	.	PASS	AC=1;AF=0.00641;AN=140;DP=853;ANN=T|intron_variant|MODIFIER|GATD3B|ENSG00000280071|Transcript|ENST00000624810.3|protein_coding||4/5|ENST00000624810.3:c.357+19546C>A|||||||rs1373489291||-1|cds_start_NF&cds_end_NF|SNV|HGNC|HGNC:53816||5|||ENSP00000485439||A0A096LP73|UPI0004F23660|||||||chr21:g.5102165G>T||||||||||||||||||||||||||||5.009|0.275409||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ```
 
-* `*.tsv` : A metadata file, relating every sample ID (as registered in the VCF file) and a sample group in column format.
-
-Example line(s):
-```
-sample	group
-SM-3MG5L	Chinanteco
-SM-3MG5F	Chocholteco
-SM-3MG46	Kanjobal
-```
-
 ---
 
 ### Pipeline Results
-* A tsv file with `*.total_variants.tsv` extension.
+* A vcf file with `*.for_upload_to_dbSNP.vcf.gz` extension.
 
 Example line(s):
 ```
-# Variants in project sample.vcf.gz
-number of SNPs: 8769
-number of indels:       1231
+##fileformat=VCFv4.2
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO
+chr21   5227536 .       C       CTCTCCTCTCT     .       .       AF_natmx=0.019
+chr21   5377617 .       C       T       .       .       AF_natmx=0.013
+chr21   9886907 .       T       A       .       .       AF_natmx=0.013
 ```
 
-* A tsv file with `*.persample_counts.tsv` extension.
+* 3 tif files with `*.all_variants.bar_ranges.tif`, `*.SNV.bar_ranges.tif` and `*.INDEL.bar_ranges.tif` extension.
 
-Example line(s):
-```
-sample SNV indel total_variants tstv_ratio missing_sites heterozygosity_ratio novel_total_variants worldwide_singletons clinvar_pato_likelypato_and_riskfactor_variants variants_in_gwascat variants_in_pgkb
-SM-3MG3L 3183 444 3627 2.196 4 1.091 1 10 0 6 0
-SM-3MG3M 3100 450 3550 2.173 1 1.115 1 13 0 5 0
-```
+These files are graphics summarizing gnomAD coverages at sites from novel variants
 
-* a tsv file named `private_variants_per_group.tsv`
-
-Example line(s):
-```
-group variant_type number
-Nahua snv 0
-Nahua indel 0
-Seri snv 2
-Seri indel 0
-```
 ---
 
 #### References
-Under the hood nf-vcf-table-description separates variants from different dabatases and uses some coding tools, please include the following ciations in your work:
+Under the hood nf-vcf-novel-dataset-builder uses some coding tools, please include the following ciations in your work:
 
 * Narasimhan, V., Danecek, P., Scally, A., Xue, Y., Tyler-Smith, C., & Durbin, R. (2016). BCFtools/RoH: a hidden Markov model approach for detecting autozygosity from next-generation sequencing data. Bioinformatics, 32(11), 1749-1751.
 * Team, R. C. (2017). R: a language and environment for statistical computing. R Foundation for Statistical Computing, Vienna. http s. www. R-proje ct. org.
