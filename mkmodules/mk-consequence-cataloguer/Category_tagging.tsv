@@ -1,0 +1,87 @@
+Type	General_category	Consequence	First_specific_consequence
+noncoding	UTR	3_prime_UTR_variant	3 prime UTR
+noncoding	UTR	3_prime_UTR_variant&NMD_transcript_variant	3 prime UTR
+noncoding	UTR	5_prime_UTR_variant	5 prime UTR
+noncoding	UTR	5_prime_UTR_variant&NMD_transcript_variant	5 prime UTR
+coding	Coding	coding_sequence_variant	Coding sequence
+noncoding	Intergenic	downstream_gene_variant	Downstream gene
+noncoding	Intergenic	intergenic_variant	Intergenic
+noncoding	Intronic	intron_variant	Intron
+noncoding	Intronic	intron_variant&NMD_transcript_variant	Intron
+noncoding	Intronic	intron_variant&non_coding_transcript_variant	Intron
+noncoding	Mature miRNA	mature_miRNA_variant	Mature miRNA
+coding	Coding	missense_variant	Missense
+coding	Coding	missense_variant&NMD_transcript_variant	Missense
+coding	Coding	missense_variant&splice_region_variant	Missense
+coding	Coding	missense_variant&splice_region_variant&NMD_transcript_variant	Missense
+noncoding	Noncoding transcript	non_coding_transcript_exon_variant	Noncoding transcript
+noncoding	Noncoding transcript	non_coding_transcript_variant	Noncoding transcript
+noncoding	Regulatory region	regulatory_region_variant	Regulatory region
+noncoding	Splicing	splice_acceptor_variant	Splice region
+noncoding	Splicing	splice_acceptor_variant&NMD_transcript_variant	Splice region
+noncoding	Splicing	splice_acceptor_variant&non_coding_transcript_variant	Splice region
+noncoding	Splicing	splice_donor_variant	Splice region
+noncoding	Splicing	splice_donor_variant&NMD_transcript_variant	Splice region
+noncoding	Splicing	splice_donor_variant&non_coding_transcript_variant	Splice region
+noncoding	Splicing	splice_region_variant&3_prime_UTR_variant	Splice region
+noncoding	Splicing	splice_region_variant&3_prime_UTR_variant&NMD_transcript_variant	Splice region
+noncoding	Splicing	splice_region_variant&5_prime_UTR_variant	Splice region
+noncoding	Splicing	splice_region_variant&5_prime_UTR_variant&NMD_transcript_variant	Splice region
+noncoding	Splicing	splice_region_variant&intron_variant	Splice region
+noncoding	Splicing	splice_region_variant&intron_variant&NMD_transcript_variant	Splice region
+noncoding	Splicing	splice_region_variant&intron_variant&non_coding_transcript_variant	Splice region
+noncoding	Splicing	splice_region_variant&non_coding_transcript_exon_variant	Splice region
+noncoding	Splicing	splice_region_variant&synonymous_variant	Splice region
+noncoding	Splicing	splice_region_variant&synonymous_variant&NMD_transcript_variant	Splice region
+coding	Coding	start_lost	Start | stop codon
+coding	Coding	start_lost&splice_region_variant	Start | stop codon
+coding	Coding	stop_gained	Start | stop codon
+coding	Coding	stop_gained&splice_region_variant	Start | stop codon
+coding	Coding	stop_lost	Start | stop codon
+coding	Coding	stop_retained_variant	Start | stop codon
+coding	Coding	stop_retained_variant&NMD_transcript_variant	Start | stop codon
+coding	Coding	synonymous_variant	Synonymous
+coding	Coding	synonymous_variant&NMD_transcript_variant	Synonymous
+noncoding	Regulatory region	TF_binding_site_variant	TF binding site
+noncoding	Intergenic	upstream_gene_variant	Upstream gene variant
+coding	Coding	incomplete_terminal_codon_variant&coding_sequence_variant	Start | stop codon
+coding	Coding	coding_sequence_variant&3_prime_UTR_variant	Coding sequence
+coding	Coding	coding_sequence_variant&5_prime_UTR_variant	Coding sequence
+coding	Frameshift variant	frameshift_variant	Frameshift
+coding	Frameshift variant	frameshift_variant&NMD_transcript_variant	Frameshift
+coding	Frameshift variant	frameshift_variant&splice_region_variant	Frameshift
+coding	Frameshift variant	frameshift_variant&splice_region_variant&intron_variant	Frameshift
+coding	Frameshift variant	frameshift_variant&splice_region_variant&NMD_transcript_variant	Frameshift
+coding	Frameshift variant	frameshift_variant&start_lost	Frameshift
+coding	Frameshift variant	frameshift_variant&start_lost&start_retained_variant	Frameshift
+coding	Frameshift variant	frameshift_variant&stop_lost	Frameshift
+coding	Frameshift variant	frameshift_variant&stop_retained_variant	Frameshift
+coding	Inframe modification	inframe_deletion	Inframe ins | del
+coding	Inframe modification	inframe_deletion&splice_region_variant	Inframe ins | del
+coding	Inframe modification	inframe_insertion	Inframe ins | del
+coding	Inframe modification	inframe_insertion&NMD_transcript_variant	Inframe ins | del
+coding	Inframe modification	inframe_insertion&splice_region_variant	Inframe ins | del
+coding	Coding	protein_altering_variant	Protein altering
+noncoding	Splicing	splice_acceptor_variant&5_prime_UTR_variant	Splice region
+noncoding	Splicing	splice_acceptor_variant&coding_sequence_variant&intron_variant	Splice region
+noncoding	Splicing	splice_acceptor_variant&frameshift_variant	Splice region
+noncoding	Splicing	splice_acceptor_variant&intron_variant	Splice region
+noncoding	Splicing	splice_acceptor_variant&intron_variant&non_coding_transcript_variant	Splice region
+noncoding	Splicing	splice_acceptor_variant&non_coding_transcript_exon_variant	Splice region
+noncoding	Splicing	splice_acceptor_variant&non_coding_transcript_exon_variant&intron_variant	Splice region
+noncoding	Splicing	splice_donor_variant&3_prime_UTR_variant&intron_variant	Splice region
+noncoding	Splicing	splice_donor_variant&5_prime_UTR_variant&intron_variant	Splice region
+noncoding	Splicing	splice_donor_variant&coding_sequence_variant	Splice region
+noncoding	Splicing	splice_donor_variant&coding_sequence_variant&intron_variant	Splice region
+noncoding	Splicing	splice_donor_variant&intron_variant	Splice region
+noncoding	Splicing	splice_donor_variant&intron_variant&non_coding_transcript_variant	Splice region
+noncoding	Splicing	splice_donor_variant&non_coding_transcript_exon_variant	Splice region
+noncoding	Splicing	splice_donor_variant&non_coding_transcript_exon_variant&intron_variant	Splice region
+noncoding	Splicing	splice_region_variant&non_coding_transcript_variant	Splice region
+coding	Coding	start_lost&inframe_deletion	Start | stop codon
+coding	Coding	stop_gained&frameshift_variant	Start | stop codon
+coding	Coding	stop_gained&frameshift_variant&splice_region_variant	Start | stop codon
+coding	Coding	stop_gained&inframe_insertion	Start | stop codon
+coding	Coding	stop_lost&3_prime_UTR_variant	Start | stop codon
+coding	Coding	stop_retained_variant&3_prime_UTR_variant	Start | stop codon
+noncoding	Regulatory region	TFBS_ablation&TF_binding_site_variant	TF binding site

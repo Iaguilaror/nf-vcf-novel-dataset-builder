@@ -1,0 +1,14 @@
+CHROM
+POS
+# ID
+REF
+ALT
+# AC
+# AN
+# DP
+# QUAL
+# FILTER
+# INFO
+AF
+# nhomalt_mx
+ANN

@@ -1,0 +1,10 @@
+MKSHELL=/bin/bash
+
+%.for_upload_to_dbSNP.vcf.gz:Q: %.vcf
+	echo "[DEBUG] remove genotypes and simplify INFO tag in preparation for a dataset for dbSNP"
+	bcftools view --drop-genotypes $prereq \
+	| bcftools annotate --remove ^INFO/AF,FILTER \
+  | sed -e "s#AF=#AF_natmx=#" \
+		-e "s/^##INFO=<ID=AF,Number=A,Type=Float,Description=\"Allele Frequency/##INFO=<ID=AF_natmx,Number=A,Type=Float,Description=\"Allele Frequency in native mexicans according to 100GMX project from INMEGEN/" \
+	| bgzip > $target \
+	&& tabix -p vcf $target

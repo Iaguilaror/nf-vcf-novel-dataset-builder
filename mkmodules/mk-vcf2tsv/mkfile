@@ -1,0 +1,18 @@
+MKSHELL=/bin/bash
+
+%.tsv.gz:Q: %.vcf
+	echo "[DEBUG] converting vcf to tsv for $prereq"
+	# start header for file
+	# define header ann fields
+	ann_header="$(bcftools view -h $prereq | grep "^##INFO=<ID=ANN," | sed "s#.*Format: ##" | tr "|" "\t" | cut -d"\"" -f1)"
+	grep -v "^#" fields_to_extract.txt | tr "\n" "\t" | sed "s#ANN\t\$#$ann_header\n#" | sed "s#AF#AF_natmx#" | gzip > $target
+	bcftools query \
+		-f "$(grep -v "^#" fields_to_extract.txt | sed "s#^#%#" | tr "\n" "\t" | sed "s#\t\$#\\\n#")" \
+		$prereq \
+	| sed \
+			-e "s#\t|#.#" \
+			-e "s#||#|.|#g" \
+			-e "s#||#|.|#g" \
+			-e "s#|\$#|.#" \
+	| tr "|" "\t" \
+	| gzip >> $target

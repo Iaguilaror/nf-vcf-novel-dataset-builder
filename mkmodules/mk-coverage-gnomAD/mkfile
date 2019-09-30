@@ -1,0 +1,3 @@
+%.PLOT:Q: %.tsv.gz
+	echo "[DEBUG] ploting gnomad coverages from $prereq"
+	Rscript --vanilla coverage-analyzer.R $prereq

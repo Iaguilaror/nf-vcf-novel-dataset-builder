@@ -1,0 +1,5 @@
+MKSHELL=/bin/bash
+
+%.removed_singletons_and_private.vcf:Q: %.vcf.gz
+	echo "[DEBUG] removing singletons and private variants"
+	bcftools view --min-ac 2 --exclude 'INFO/AC == 2 & GT="AA"' $prereq > $target
