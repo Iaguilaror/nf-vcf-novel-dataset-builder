@@ -1,13 +1,24 @@
+## mk-select-novel ###
+# mkfile script with dependency rules for:
+# 1. Filtering novel SNPs.
+# 2. Filter novel indels.
+# 3. Concatenate novel SNPs and indels.
+# 4. Sort vcf.
+## For more information about 'mk' dependency control, see https://9fans.github.io/plan9port/man/man1/mk.html
+
+## Define shell command line which will be used to run scripts.
 MKSHELL=/bin/bash
 
 %.novel.vcf:Q: %.novel_snps.tmp %.novel_indels.tmp
 	echo "[DEBUG] gathering novel variants"
+	## To join novel SNPs and indels, use concat --allow-overlaps 
 	bcftools concat --allow-overlaps $prereq \
 	| bcftools sort > $target \
 	&& rm $stem.*.tmp*
 
 %.novel_snps.tmp:Q: %.vcf
 	echo "[DEBUG] selecting novel snps"
+	## To filter only indels, use view --types snps
 	## use grep -v "rs[0-9]*" to remove SNPs whitout rsID but with overlapping variants
 	bcftools view --types snps --novel $prereq \
 	| grep -v "rs[0-9]*" | bgzip > $target \
@@ -15,6 +26,10 @@ MKSHELL=/bin/bash
 
  %.novel_indels.tmp:Q: %.vcf
 	echo "[DEBUG] selecting novel indels"
+	## Use bcftools to manipulate variants in the compressed Variant Call Format (VCF) (input).
+	## For more information about 'bcftools' commands, see https://samtools.github.io/bcftools/bcftools.html
+	## For more information about the VCF format, please go to the next link: https://www.internationalgenome.org/wiki/Analysis/Variant%20Call%20Format/vcf-variant-call-format-version-40/
+	## To filter only indels, use view --types indels
 	## use grep -v "rs[0-9]*" to remove indels whitout rsID but with overlapping variants
 	bcftools view --types indels --novel $prereq \
 	| grep -v "rs[0-9]*" | bgzip > $target \

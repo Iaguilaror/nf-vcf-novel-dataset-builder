@@ -1,5 +1,15 @@
+### mk-remove-singletones-and-private ###
+# mkfile script with dependency rules for:
+#	1. Filtering positions where AC >= 3 to eliminate singletons and private.
+## For more information about 'mk' dependency control, see https://9fans.github.io/plan9port/man/man1/mk.html
+
+## Define shell command line which will be used to run scripts.
 MKSHELL=/bin/bash
 
+## Use bcftools to manipulate variants in the compressed Variant Call Format (VCF) (input).
+## For more information about 'bcftools' commands, see https://samtools.github.io/bcftools/bcftools.html
+## For more information about the VCF format, please go to the next link: https://www.internationalgenome.org/wiki/Analysis/Variant%20Call%20Format/vcf-variant-call-format-version-40/
+## To filter the VCF, view --min-ac 2 --exclude 'INFO/AC == 2 & GT="AA"' prints sites for where ac >=3.
 %.removed_singletons_and_private.vcf:Q: %.vcf.gz
 	echo "[DEBUG] removing singletons and private variants"
 	bcftools view --min-ac 2 --exclude 'INFO/AC == 2 & GT="AA"' $prereq > $target

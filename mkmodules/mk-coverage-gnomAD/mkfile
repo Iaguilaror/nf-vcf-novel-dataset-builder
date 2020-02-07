@@ -1,3 +1,12 @@
+## mk-coverage-gnomAD ###
+# mkfile script with dependency rules for:
+# 1. To plot gnomAD coverages.
+## For more information about 'mk' dependency control, see https://9fans.github.io/plan9port/man/man1/mk.html
+
+## Define shell command line which will be used to run scripts.
+MKSHELL=/bin/bash
+
 %.PLOT:Q: %.tsv.gz
+	# This block of code uses coverage-analyzer.R to plot coverage.
 	echo "[DEBUG] ploting gnomad coverages from $prereq"
 	Rscript --vanilla coverage-analyzer.R $prereq

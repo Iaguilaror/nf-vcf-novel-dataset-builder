@@ -1,6 +1,21 @@
+### mk-simplify-vcf ###
+# mkfile script with dependency rules for:
+# 1. To remove genotypes.
+# 2. To remove fields except INFO/AF and FILTER.
+# 3. To rename local AF to AF_natmx, also in header.
+## For more information about 'mk' dependency control, see https://9fans.github.io/plan9port/man/man1/mk.html
+
+## Define shell command line which will be used to run scripts.
 MKSHELL=/bin/bash
 
 %.for_upload_to_dbSNP.vcf.gz:Q: %.vcf
+	## Use bcftools to manipulate variants in the compressed Variant Call Format (VCF) (input).
+	## For more information about 'bcftools' commands, see https://samtools.github.io/bcftools/bcftools.html
+	## For more information about the VCF format, please go to the next link: https://www.internationalgenome.org/wiki/Analysis/Variant%20Call%20Format/vcf-variant-call-format-version-40/
+	# To remove genotypes, use view --drop-genotypes
+	# To remove all fields except INFO/AF and FILTER, use annotate --remove with fields starting with a '^'.
+	# To change AF to AF_natmx, use sed -e
+	# To change AF to AF_natmx in header, use sed -e
 	echo "[DEBUG] remove genotypes and simplify INFO tag in preparation for a dataset for dbSNP"
 	bcftools view --drop-genotypes $prereq \
 	| bcftools annotate --remove ^INFO/AF,FILTER \

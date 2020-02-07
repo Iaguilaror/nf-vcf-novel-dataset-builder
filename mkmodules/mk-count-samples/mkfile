@@ -1,7 +1,16 @@
+### mk-count-samples ###
+# mkfile script with dependency rules for:
+# 1. List all samples.
+# 2. Extract block of counted data only.
+# 3. Transform to column format.
+## For more information about 'mk' dependency control, see https://9fans.github.io/plan9port/man/man1/mk.html
+
+## Define shell command line which will be used to run scripts.
 MKSHELL=/bin/bash
 
 %.counts.tsv:Q: %.count_block.tmp
 	echo "[DEBUG] transform wide to long format"
+	# This block of code uses final-counter.R to format the output.
 	Rscript --vanilla final-counter.R $prereq $target \
 	&& rm $stem.*.tmp
 
@@ -12,6 +21,11 @@ MKSHELL=/bin/bash
 
 %.rawstats.tmp:Q: %.vcf
 	echo "[DEBUG] count raw stats for all samples for"
+	## Use bcftools to manipulate variants in the compressed Variant Call Format (VCF) (input).
+	## For more information about 'bcftools' commands, see https://samtools.github.io/bcftools/bcftools.html
+	## For more information about the VCF format, please go to the next link: https://www.internationalgenome.org/wiki/Analysis/Variant%20Call%20Format/vcf-variant-call-format-version-40/
+	## To see only samples of vcf, use bcftools view -h $prereq | tail -n1 | cut -f10- | tr "\t" ",")
+	## To know stats of samples, use stats --samples
 	all_samples=$(bcftools view -h $prereq | tail -n1 | cut -f10- | tr "\t" ",")
 	echo "[...] samples to count are: $all_samples"
 	bcftools stats --samples $all_samples $prereq > $target

@@ -1,5 +1,12 @@
+### mk-consequence-cataloguer ###
+# mkfile script with dependency rules for:
+# 1. To catalogue consequences for each type of variant.
+## For more information about 'mk' dependency control, see https://9fans.github.io/plan9port/man/man1/mk.html
+
+## Define shell command line which will be used to run scripts.
 MKSHELL=/bin/bash
 
 %.ALL_ANALYSIS:Q: %.tsv.gz
+	# This block of code uses cataloguer.R to catalogue novel variants.
 	echo "[DEBUG] cataloguing consequences for every type of novel variant"
 	Rscript --vanilla cataloguer.R $prereq $target
