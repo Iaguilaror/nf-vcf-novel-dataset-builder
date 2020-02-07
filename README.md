@@ -8,6 +8,12 @@ Important note: input file must be previously annotated by https://github.com/Ia
 
 ---
 
+### Workflow overview
+![General Workflow](dev_notes/Workflow.png)
+
+---
+
+
 ### Features
   **-v 0.0.1**
 
@@ -98,6 +104,19 @@ chr21	5102165	rs1373489291	G	T	.	PASS	AC=1;AF=0.00641;AN=140;DP=853;ANN=T|intron
 ---
 
 ### Pipeline Results
+* An uncompressed `TSV` file format, with counted samples. (could be taken out, since VCF-summarizer pipeline already counts this)
+
+Example line(s):
+
+```
+sample  variant_type    numbers sex     pop     chromosome
+SM-3MG3L        nRefHom 43      NA      NA      NA
+SM-3MG3M        nRefHom 43      NA      NA      NA
+SM-3MG3N        nRefHom 43      NA      NA      NA
+SM-3MG3O        nRefHom 44      NA      NA      NA
+...
+```
+
 * A vcf file with `*.for_upload_to_dbSNP.vcf.gz` extension.
 
 Example line(s):
@@ -107,6 +126,17 @@ Example line(s):
 chr21   5227536 .       C       CTCTCCTCTCT     .       .       AF_natmx=0.019
 chr21   5377617 .       C       T       .       .       AF_natmx=0.013
 chr21   9886907 .       T       A       .       .       AF_natmx=0.013
+```
+* A vcf and tsv of all novel variants set with VEP Extended annotations.
+
+Example line(s):
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  SM-3MG3L        SM-3MG3M        SM-3MG3N        SM-3MG3O        SM-3MG3P        SM-3MG3R        SM-3MG3U        SM-3MG3V        SM-3
+chr21   5227536 .       C       CTCTCCTCTCT     .       PASS    AC=3;AF=0.019;AN=152;DP=1699;ANN=TCTCCTCTCT|intergenic_variant|MODIFIER|||||||||||||||||||insertion|||||||||||||||||chr21:g.5227537_5227538i
+
+```
+CHROM   POS     REF     ALT     AF_natmx        Allele  Consequence     IMPACT  SYMBOL  Gene    Feature_type    Feature BIOTYPE EXON    INTRON  HGVSc   HGVSp   cDNA_position   CDS_position    Protein_posi
+chr21   5227536 C       CTCTCCTCTCT     0.019   TCTCCTCTCT      intergenic_variant      MODIFIER        .       .       .       .       .       .       .       .       .       .       .       .       .
+...
 ```
 
 * 3 tif files with `*.all_variants.bar_ranges.tif`, `*.SNV.bar_ranges.tif` and `*.INDEL.bar_ranges.tif` extension.
